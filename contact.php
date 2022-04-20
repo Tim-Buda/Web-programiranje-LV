@@ -1,3 +1,4 @@
+
 <?php 
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
@@ -15,4 +16,5 @@
 
 <?php
     header('Location: index.php');
+    header('Access-Control-Allow-Origin: *');
 ?>
