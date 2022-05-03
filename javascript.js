@@ -22,3 +22,24 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 }
+
+var api_url = 'https://api.hnb.hr/tecajn/v1?valuta=EUR';
+async function getHnbData(){
+  var tokPodataka = await fetch(api_url);
+  console.log(tokPodataka);
+  var podaci = await tokPodataka.json();
+  console.log(podaci);
+
+  var cijenaEurSezona = parseFloat(document.getElementById('sezona').textContent);
+  var cijenaEurVanSezone = parseFloat(document.getElementById('van-sezone').textContent);
+
+  var cijena1 = parseFloat(podaci[0]["Srednji za devize"].replace(',', '.'))*cijenaEurSezona;
+  var cijena2 = parseFloat(podaci[0]["Srednji za devize"].replace(',', '.'))*cijenaEurVanSezone;
+
+  document.getElementById('tecaj1').textContent = Math.round((cijena1 + Number.EPSILON) * 100) / 100 + 'HRK';
+  document.getElementById('tecaj2').textContent = Math.round((cijena2 + Number.EPSILON) * 100) / 100 + 'HRK';
+
+}
+getHnbData();
+
+
