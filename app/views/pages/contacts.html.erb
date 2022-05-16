@@ -1,0 +1,59 @@
+<main class="contact">
+    <div class="prices">
+        <table>
+            <tr>
+                <th colspan="2">Cjenik</th>
+            </tr>
+            <tr>
+                <td>Sezona</td>
+                <td>Van sezone</td>
+            </tr>
+            <tr>
+                <td id="sezona">80€</td>
+                <td id="van-sezone">50€</td>
+            </tr>
+            <tr>
+                <td id="tecaj1">Loading...</td>
+                <td id="tecaj2">Loading...</td>
+            </tr>
+        </table>
+    </div>
+    <div class="contact-info">
+        <h3>Osnovne informacije</h3>
+        <p>Vlasnik: Ana Budimir</p>
+        <p>OIB: 32162253217</p>
+        <p>apartmani.ann@gmail.com</p>
+    </div>
+    <% if current_user%>
+        <div class="contact-main">
+            <h2>Kontaktirajte nas</h2>
+            <form name="contactform" method="post" action="contact.php">
+                <input name="first_name" type="text"  placeholder="Ime" required>
+                <input name="last_name" type="text"  placeholder="Prezime" required>
+                <input name="email" type="email" placeholder="Email" required>
+                <input name="telephone" type="text" placeholder="Telefon" >
+                <div class="date"> 
+                    <div>
+                        <label for="start">Početak:</label>
+                        <input type="date" id="start" name="trip-start" value="2022-06-01" min="2022-04-01" max="2022-12-31">
+                    </div>
+                    <div>
+                        <label for="start">Kraj:</label>
+                        <input type="date" id="end" name="trip-end" value="2022-06-01" min="2022-06-01" max="2022-12-31">
+                    </div>
+                </div>
+                <select name="broj-apartmana" id="apartmani">
+                    <option value="Apartman 1">Apartman 1</option>
+                    <option value="Apartman 2">Apartman 2</option>
+                    <option value="Bilo Koji">Bilo koji</option>
+                </select>
+                <input name="submit" class="button" type="submit" value="Pošalji">
+            </form>
+        </div>
+    <% else%>
+        <div class="contact-main">
+            <h2>Kontaktirajte nas</h2>
+            <%= button_to "Login", new_user_session_path, class:"login", id:"loginButton" %>
+        </div>
+    <% end%>
+</main>
