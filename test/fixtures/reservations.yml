@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_from: 2022-05-24
+  date_to: 2022-05-24
+  user: one
+  apartment: one
+
+two:
+  date_from: 2022-05-24
+  date_to: 2022-05-24
+  user: two
+  apartment: two

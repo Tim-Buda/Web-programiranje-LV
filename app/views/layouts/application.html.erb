@@ -7,14 +7,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css' %>
   </head>
 
   <body>
     <%= render "layouts/navigation" %>
+    <%= render "layouts/notification"%>
     <%= yield %>
-    <%= render "layouts/footer" %>
+    <% unless devise_controller? %>
+      <%= render "layouts/footer" %>
+    <% end %>
   </body>
 </html>
 
@@ -43,24 +47,7 @@ window.onclick = function (event) {
   }
 }
 
-var api_url = 'https://api.hnb.hr/tecajn/v1?valuta=EUR';
-async function getHnbData(){
-  var tokPodataka = await fetch(api_url);
-  console.log(tokPodataka);
-  var podaci = await tokPodataka.json();
-  console.log(podaci);
 
-  var cijenaEurSezona = parseFloat(document.getElementById('sezona').textContent);
-  var cijenaEurVanSezone = parseFloat(document.getElementById('van-sezone').textContent);
-
-  var cijena1 = parseFloat(podaci[0]["Srednji za devize"].replace(',', '.'))*cijenaEurSezona;
-  var cijena2 = parseFloat(podaci[0]["Srednji za devize"].replace(',', '.'))*cijenaEurVanSezone;
-
-  document.getElementById('tecaj1').textContent = Math.round((cijena1 + Number.EPSILON) * 100) / 100 + 'HRK';
-  document.getElementById('tecaj2').textContent = Math.round((cijena2 + Number.EPSILON) * 100) / 100 + 'HRK';
-
-}
-getHnbData();
 
 !function (d, s, id) { 
   var js, fjs = d.getElementsByTagName(s)[0]; 

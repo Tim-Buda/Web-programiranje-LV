@@ -13,8 +13,8 @@
                 <td id="van-sezone">50€</td>
             </tr>
             <tr>
-                <td id="tecaj1">Loading...</td>
-                <td id="tecaj2">Loading...</td>
+                <td id="tecaj1"><%= 80*@rate%> kn</td>
+                <td id="tecaj2"><%= 50*@rate%> kn</td>
             </tr>
         </table>
     </div>
@@ -24,7 +24,6 @@
         <p>OIB: 32162253217</p>
         <p>apartmani.ann@gmail.com</p>
     </div>
-    <% if current_user%>
         <div class="contact-main">
             <h2>Kontaktirajte nas</h2>
             <form name="contactform" method="post" action="contact.php">
@@ -50,10 +49,4 @@
                 <input name="submit" class="button" type="submit" value="Pošalji">
             </form>
         </div>
-    <% else%>
-        <div class="contact-main">
-            <h2>Kontaktirajte nas</h2>
-            <%= button_to "Login", new_user_session_path, class:"login", id:"loginButton" %>
-        </div>
-    <% end%>
 </main>
