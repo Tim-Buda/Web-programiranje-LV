@@ -1,0 +1,41 @@
+
+  #login-form{
+    height: 70vh;
+    margin: 105px auto 30px auto;
+    width: 30%;
+  }
+
+
+/* Full-width input fields */
+input[type=text],
+input[type=password],
+input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+.signup {
+    background-color: #1687a7;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 12px;
+    font-size: 1.1em;
+}
+
+.signup:hover {
+    opacity: 0.8;
+}
+
+.signup-text{
+    margin-bottom: 5px;
+}
+
