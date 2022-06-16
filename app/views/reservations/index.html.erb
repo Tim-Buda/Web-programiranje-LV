@@ -4,7 +4,7 @@
   <%= form_for :reservation do |form|%>
     <p>Odaberi apartman: </p>
     <% Apartment.all.each do |a|%>
-      <%= form.radio_button :apartment_id, a.id%>
+      <%= form.radio_button :apartment_id, a.id, checked: true%>
       <%= form.label :apartment_id, a.name%>
       <br/>
     <% end%>
@@ -29,6 +29,8 @@
         <p>Do: <b><%= r.date_to.strftime("%d.%m.%Y")%></b></p>
         
         <p>Odobreno: <%= r.is_approved ? "Da" : "Ne"%></p>
+
+       
       </div>
     <%end%>
   <%end%>

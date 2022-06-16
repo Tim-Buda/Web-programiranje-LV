@@ -7,11 +7,14 @@
         <li><%= link_to "Lokacija", location_path %></li>
         <li><%= link_to "Kontakti", contacts_path %></li>
         <li><%= link_to "Rezervacija", reservations_path if current_user%></li>
+        <% if current_user&.is_admin %>
+            <li><%= link_to "Admin", admin_root_path %></li>
+        <% end%>
         <% if current_user %>
             <span>Pozdrav, <%= current_user.first_name%></span>
             <li><%= button_to "Odjava", destroy_user_session_path, method: :delete, class:"login", id:"loginButton" %></li>
         <% else%>
-            <li><%= button_to "Prijava", new_user_session_path, class:"login", id:"loginButton" %></li>
+            <li><%= button_to "Prijava", new_user_session_path, method: :get, class:"login", id:"loginButton" %></li>
         <% end%>
     </ul>
     </nav>

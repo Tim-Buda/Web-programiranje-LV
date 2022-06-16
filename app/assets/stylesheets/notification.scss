@@ -4,16 +4,15 @@ $danger: #e74c34;
 $grey: #cccccc;
 
 .alert {
-  position: relative;
+  position: absolute;
   border-radius: 5px;
   box-sizing: border-box;
   color: white;
   font-size: 1.5em;
-  margin: 0 auto;
-  margin-top: 10vh;
-  margin-bottom: 0;
+  margin: 5% 30%;
   padding: 1em;
-  width: calc(100% - 1000px);
+  width: 40%;//calc(100% - 1000px);
+  z-index: 99;
 }
 
 @each $name, $color in(

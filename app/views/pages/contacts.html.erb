@@ -13,8 +13,8 @@
                 <td id="van-sezone">50€</td>
             </tr>
             <tr>
-                <td id="tecaj1"><%= 80*@rate%> kn</td>
-                <td id="tecaj2"><%= 50*@rate%> kn</td>
+                <td id="tecaj1"><%= sprintf('%.2f', 80*@rate)%> kn</td>
+                <td id="tecaj2"><%= sprintf('%.2f', 50*@rate)%> kn</td>
             </tr>
         </table>
     </div>

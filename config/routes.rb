@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get "lokacija", to: "pages#location", as: "location"
   get "kontakti", to: "pages#contacts", as: "contacts"
   resources :reservations, only: [:index, :new, :create], path: "rezervacije"
+  get "potvrdi/:id", to: "reservations#approve", as: "approve_reservation" 
   namespace :admin do
     root "base#index"
+    delete "reservations/:id", to: "reservations#destroy", as: "reservation"
+    get "potvrdi/:id", to: "reservations#approve", as: "approve_reservation" 
   end
 end

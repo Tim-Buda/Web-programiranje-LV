@@ -1,0 +1,10 @@
+hr:
+  activerecord:
+    errors:
+      models:
+        reservation:
+          attributes:
+            date_from:
+              blank: "Početni datum ne može biti prazan!"
+            date_to:
+              blank: "Krajnji datum ne može biti prazan!"

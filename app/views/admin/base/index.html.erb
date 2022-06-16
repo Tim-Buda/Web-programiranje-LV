@@ -1,11 +1,43 @@
 <div class="home-main">
-    <% @reservations.each do |reservation|%>
-        <div>
-            <%= reservation.apartment.name%>
-            <%= reservation.user.first_name%>
-            <%= reservation.user.last_name%>
-            <%= reservation.date_from%>
-            <%= reservation.date_to%>
-        </div>
-    <% end%>
+    <table class=>
+        <tr>
+            <th>Apartman</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Datum zahtjeva</th>
+            <th>Početni datum</th>
+            <th>Krajnji datum</th>
+            <th>Status</th>
+            <th>Akcije</th>
+        </tr>
+        <% @reservations.each do |reservation|%>
+            <tr>
+                <td>
+                    <%= reservation.apartment.name%>
+                </td>
+                <td>
+                    <%= reservation.user.first_name%>
+                </td>
+                <td>
+                    <%= reservation.user.last_name%>
+                </td>
+                <td>
+                    <%= formatted_date(reservation.created_at)%>
+                </td>
+                <td>
+                    <%= formatted_date(reservation.date_from)%>
+                </td>
+                <td>
+                    <%= formatted_date(reservation.date_to)%>
+                </td>
+                <td>
+                    <%= reservation.is_approved ? "Potvrđeno" : "Nije potvrđeno"%>
+                </td>
+                <td>
+                    <%= link_to "Potvrdi", admin_approve_reservation_path(reservation.id)%>
+                    <%= link_to "Odbij", admin_reservation_path(reservation.id), method: :delete%>
+                </td>
+            </tr>
+        <% end%>
+    </table>
 </div>
