@@ -20,12 +20,14 @@ class Reservation < ApplicationRecord
 
   def self.reserved_dates(apartment_id)
     dates = []
-    Reservation.where(apartment_id: apartment_id).each do |reservation|
+    Reservation.where(apartment_id: apartment_id, is_approved: true).each do |reservation|
       dates << (reservation.date_from..reservation.date_to).to_a
     end
-    return dates
+    dates.flatten!
+    kr = dates.map{|d| d.to_date.strftime("%d.%m.%Y")}
+    return kr
   end
-  
+
   def check_date_range
     if self.date_from && self.date_to
       if self.date_from > self.date_to

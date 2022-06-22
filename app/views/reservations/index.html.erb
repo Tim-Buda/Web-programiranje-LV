@@ -3,17 +3,17 @@
 
   <%= form_for :reservation do |form|%>
     <p>Odaberi apartman: </p>
-    <% Apartment.all.each do |a|%>
-      <%= form.radio_button :apartment_id, a.id, checked: true%>
+    <% Apartment.all.each_with_index do |a, i|%>
+      <%= form.radio_button :apartment_id, a.id, id: "checkbox#{i}", checked: true%>
       <%= form.label :apartment_id, a.name%>
       <br/>
     <% end%>
 
     <%= form.label :date_from, "Datum od"%>
-    <%= form.text_field :date_from, id: "datepicker1"%>
+    <%= form.text_field :date_from, autocomplete: "off", id: "from", class: "js-datepicker"%>
 
     <%= form.label :date_to, "Datum do"%>
-    <%= form.text_field :date_to, id: "datepicker2"%>
+    <%= form.text_field :date_to, autocomplete: "off", id: "to", class: "js-datepicker"%>
 
     <%= form.submit "Zatraži rezervaciju"%>
   <% end%>
@@ -46,15 +46,41 @@
 }
 </style>
 
-<script>
-  $( function() {
-    $( "#datepicker1" ).datepicker({
-      dateFormat:'dd.mm.yy'
-    });
-    $( "#datepicker2" ).datepicker({
-      dateFormat:'dd.mm.yy'
-    });
-  } );
+<script type="text/javascript">
+    
+      
+    
+    
 
-  
+    $( "#from" ).datepicker({
+      dateFormat: "dd.mm.yy",
+      minDate: 1,
+      onClose: function( selectedDate ) {
+        var date2 = $('#from').datepicker('getDate');
+        date2.setDate(date2.getDate()+4)
+        $( "#to" ).datepicker( "option", "minDate", date2);
+      },
+      beforeShowDay: function(date) {
+        let datesApartment1 = <%= raw Reservation.reserved_dates(Apartment.first.id)%>
+        let datesApartment2 = <%= raw Reservation.reserved_dates(Apartment.second.id)%>
+        var day = jquery.datepicker.formatDate('dd.mm.yy', date);
+        return [ ($('#checkbox0').is(":checked")) ? datesApartment1.indexOf(day) == -1 : datesApartment2.indexOf(day) == -1]
+      }
+      
+    });
+    $( "#to" ).datepicker({
+      dateFormat: "dd.mm.yy",
+      minDate: "+5d",
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      },
+      beforeShowDay: function(date) {
+        let datesApartment1 = <%= raw Reservation.reserved_dates(Apartment.first.id)%>
+        let datesApartment2 = <%= raw Reservation.reserved_dates(Apartment.second.id)%>
+        var day = jquery.datepicker.formatDate('dd.mm.yy', date);
+        return [ ($('#checkbox0').is(":checked")) ? datesApartment1.indexOf(day) == -1 : datesApartment2.indexOf(day) == -1 ]
+      }
+    });
+
+    
 </script>
