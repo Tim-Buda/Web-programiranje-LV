@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "kontakti", to: "pages#contacts", as: "contacts"
   resources :reservations, only: [:index, :new, :create], path: "rezervacije"
   get "potvrdi/:id", to: "reservations#approve", as: "approve_reservation" 
+  post "kontakt", to: "contacts#send_mail", as: "contact"
   namespace :admin do
     root "base#index"
     delete "reservations/:id", to: "reservations#destroy", as: "reservation"

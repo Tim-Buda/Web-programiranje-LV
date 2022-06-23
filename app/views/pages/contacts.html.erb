@@ -26,27 +26,24 @@
     </div>
         <div class="contact-main">
             <h2>Kontaktirajte nas</h2>
-            <form name="contactform" method="post" action="contact.php">
-                <input name="first_name" type="text"  placeholder="Ime" required>
-                <input name="last_name" type="text"  placeholder="Prezime" required>
-                <input name="email" type="email" placeholder="Email" required>
-                <input name="telephone" type="text" placeholder="Telefon" >
+            <%= form_with url: "kontakt", local: true do |form| %>
+                <%= form.text_field :first_name, placeholder: "Ime", required: true %>
+                <%= form.text_field :last_name, placeholder: "Prezime", required: true %>
+                <%= form.email_field :email, placeholder: "Email", required: true%>
+                <%= form.text_field :telephone, placeholder: "Telefon", required: true %>
                 <div class="date"> 
                     <div>
-                        <label for="start">Početak:</label>
-                        <input type="date" id="start" name="trip-start" value="2022-06-01" min="2022-04-01" max="2022-12-31">
+                        <%= form.label :start, "Početak" %>
+                        <%= form.date_field :start, value: Date.tomorrow, min: Date.tomorrow %>
                     </div>
                     <div>
-                        <label for="start">Kraj:</label>
-                        <input type="date" id="end" name="trip-end" value="2022-06-01" min="2022-06-01" max="2022-12-31">
+                        <%= form.label :end, "Kraj" %>
+                        <%= form.date_field :end, value: Date.tomorrow, min: Date.tomorrow %>
                     </div>
                 </div>
-                <select name="broj-apartmana" id="apartmani">
-                    <option value="Apartman 1">Apartman 1</option>
-                    <option value="Apartman 2">Apartman 2</option>
-                    <option value="Bilo Koji">Bilo koji</option>
-                </select>
-                <input name="submit" class="button" type="submit" value="Pošalji">
-            </form>
+                <%#= form.label :apartment, "Apartman"%>
+                <%= form.select :apartment, ["Apartman 1", "Apartman 2", "Bilo koji"] %>
+                <%= form.submit "Pošalji", class: "button"%>
+            <% end %>
         </div>
 </main>

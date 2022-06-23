@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= @first_name + " " + @last_name%> je zatražio rezervaciju za apartman "<%= @apartment %>"
+     od <%= @start_date.to_date.strftime("%d.%m.%Y") %> do <%= @end_date.to_date.strftime("%d.%m.%Y") %>.</p>
+    <br>
+    <p>Email: <%= @user_email %></p>
+    <p>Telefon: <%= @telephone %></p>
+  </body>
+</html>
