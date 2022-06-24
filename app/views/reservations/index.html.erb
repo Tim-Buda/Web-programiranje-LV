@@ -2,28 +2,37 @@
 <div class="wrapper">
 
   <%= form_for :reservation do |form|%>
-    <p>Odaberi apartman: </p>
-    <% Apartment.all.each_with_index do |a, i|%>
-      <%= form.radio_button :apartment_id, a.id, id: "checkbox#{i}", checked: true%>
-      <%= form.label :apartment_id, a.name%>
-      <br/>
-    <% end%>
-
-    <%= form.label :date_from, "Datum od"%>
-    <%= form.text_field :date_from, autocomplete: "off", id: "from", class: "js-datepicker"%>
-
-    <%= form.label :date_to, "Datum do"%>
-    <%= form.text_field :date_to, autocomplete: "off", id: "to", class: "js-datepicker"%>
-
-    <%= form.submit "Zatraži rezervaciju"%>
+    <div class = "flex-form">
+      <div>
+        <label>Odaberi apartman: </label>
+        <br>
+        <div class = "apartments-name">
+        <% Apartment.all.each_with_index do |a, i|%>
+          <%= form.radio_button :apartment_id, a.id, id: "checkbox#{i}", checked: true%>
+          <%= form.label :apartment_id, a.name, class: "apartments-name-label"%>
+          <br/>
+        <% end%>
+        </div>
+      </div>
+      <div>
+        <%= form.label :date_from, "Datum od"%>
+        <%= form.text_field :date_from, autocomplete: "off", id: "from", class: "js-datepicker"%>
+      </div>
+      <div>
+        <%= form.label :date_to, "Datum do"%>
+        <%= form.text_field :date_to, autocomplete: "off", id: "to", class: "js-datepicker"%>
+      </div>
+    </div>
+    <%= form.submit "Zatraži rezervaciju", class: "submit"%>
   <% end%>
   <br/>
+  <div class = "all-reservations">
   <% if !@reservations.blank? %>
     <h2>Vaše rezervacije:</h2>
     <% @reservations.each do |r|%>
     <br/>
-      <div>
-        <%= r.apartment.name%>
+      <div class = "reservation">
+        <h3><%= r.apartment.name%></h3>
         <p>Od: <b><%= r.date_from.strftime("%d.%m.%Y")%></b></p>
         
         <p>Do: <b><%= r.date_to.strftime("%d.%m.%Y")%></b></p>
@@ -34,6 +43,7 @@
       </div>
     <%end%>
   <%end%>
+  </div>
 </div>
 
 
